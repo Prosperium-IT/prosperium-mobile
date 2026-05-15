@@ -1,6 +1,7 @@
 import { Database } from '@nozbe/watermelondb'
 import SQLiteAdapter from '@nozbe/watermelondb/adapters/sqlite'
 import { schema } from './schema'
+import { migrations } from './migrations'
 import { Lancamento } from './models/Lancamento'
 import { Pessoa } from './models/Pessoa'
 import { Operacao } from './models/Operacao'
@@ -12,6 +13,7 @@ import { TpLcto } from './models/TpLcto'
 function createDatabase(tenant: string): Database {
   const adapter = new SQLiteAdapter({
     schema,
+    migrations,
     dbName: `prosperium_${tenant}`,
     jsi: true,
     onSetUpError: (error) => {
