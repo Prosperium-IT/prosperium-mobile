@@ -1,0 +1,112 @@
+import { appSchema, tableSchema } from '@nozbe/watermelondb'
+
+export const schema = appSchema({
+  version: 1,
+  tables: [
+    tableSchema({
+      name: 'lancamentos',
+      columns: [
+        { name: 'external_id', type: 'string', isOptional: true },
+        { name: 'server_id', type: 'number', isOptional: true },
+        { name: 'data_lancamento', type: 'string' },
+        { name: 'valor', type: 'number' },
+        { name: 'vlr_pgto', type: 'number', isOptional: true },
+        { name: 'descricao', type: 'string' },
+        { name: 'natureza', type: 'number' },
+        { name: 'id_conta_caixa', type: 'number', isOptional: true },
+        { name: 'id_conta_contabil', type: 'number', isOptional: true },
+        { name: 'id_pessoa', type: 'number', isOptional: true },
+        { name: 'id_operacao', type: 'number', isOptional: true },
+        { name: 'id_un_negocio', type: 'number', isOptional: true },
+        { name: 'id_tp_lcto', type: 'number', isOptional: true },
+        { name: 'status_pgto', type: 'string' },
+        { name: 'observacoes', type: 'string', isOptional: true },
+        // sync_status: 'pending' | 'syncing' | 'synced' | 'error'
+        { name: 'sync_status', type: 'string' },
+        { name: 'sync_error', type: 'string', isOptional: true },
+        { name: 'created_at', type: 'number' },
+        { name: 'updated_at', type: 'number' },
+      ],
+    }),
+    tableSchema({
+      name: 'pessoas',
+      columns: [
+        { name: 'external_id', type: 'string', isOptional: true },
+        { name: 'server_id', type: 'number', isOptional: true },
+        { name: 'nome', type: 'string' },
+        { name: 'tipo', type: 'string' },
+        { name: 'cpf_cnpj', type: 'string', isOptional: true },
+        { name: 'email', type: 'string', isOptional: true },
+        { name: 'telefone', type: 'string', isOptional: true },
+        { name: 'sync_status', type: 'string' },
+        { name: 'created_at', type: 'number' },
+        { name: 'updated_at', type: 'number' },
+      ],
+    }),
+    tableSchema({
+      name: 'operacoes',
+      columns: [
+        { name: 'external_id', type: 'string', isOptional: true },
+        { name: 'server_id', type: 'number', isOptional: true },
+        { name: 'nome', type: 'string' },
+        { name: 'codigo', type: 'string', isOptional: true },
+        { name: 'id_navio', type: 'number', isOptional: true },
+        { name: 'id_porto', type: 'number', isOptional: true },
+        { name: 'data_inicio', type: 'string', isOptional: true },
+        { name: 'data_fim_prevista', type: 'string', isOptional: true },
+        { name: 'valor_previsto', type: 'number', isOptional: true },
+        { name: 'status', type: 'string' },
+        { name: 'observacoes', type: 'string', isOptional: true },
+        { name: 'sync_status', type: 'string' },
+        { name: 'created_at', type: 'number' },
+        { name: 'updated_at', type: 'number' },
+      ],
+    }),
+    tableSchema({
+      name: 'navios',
+      columns: [
+        { name: 'external_id', type: 'string', isOptional: true },
+        { name: 'server_id', type: 'number', isOptional: true },
+        { name: 'nome', type: 'string' },
+        { name: 'imo', type: 'string', isOptional: true },
+        { name: 'bandeira', type: 'string', isOptional: true },
+        { name: 'tipo', type: 'string', isOptional: true },
+        { name: 'sync_status', type: 'string' },
+        { name: 'created_at', type: 'number' },
+        { name: 'updated_at', type: 'number' },
+      ],
+    }),
+    tableSchema({
+      name: 'portos',
+      columns: [
+        { name: 'external_id', type: 'string', isOptional: true },
+        { name: 'server_id', type: 'number', isOptional: true },
+        { name: 'nome', type: 'string' },
+        { name: 'codigo_locode', type: 'string', isOptional: true },
+        { name: 'pais', type: 'string', isOptional: true },
+        { name: 'estado', type: 'string', isOptional: true },
+        { name: 'sync_status', type: 'string' },
+        { name: 'created_at', type: 'number' },
+        { name: 'updated_at', type: 'number' },
+      ],
+    }),
+    // Read-only — sem external_id, sem sync_status
+    tableSchema({
+      name: 'un_negocios',
+      columns: [
+        { name: 'server_id', type: 'number' },
+        { name: 'nome', type: 'string' },
+        { name: 'codigo', type: 'string', isOptional: true },
+      ],
+    }),
+    tableSchema({
+      name: 'tp_lctos',
+      columns: [
+        { name: 'server_id', type: 'number' },
+        { name: 'descricao', type: 'string' },
+        { name: 'natureza', type: 'number' },
+        { name: 'codigo', type: 'string', isOptional: true },
+      ],
+    }),
+  ],
+})
