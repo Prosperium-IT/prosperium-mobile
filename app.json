@@ -27,7 +27,13 @@
     "plugins": [
       "expo-router",
       "expo-secure-store",
-      "expo-local-authentication"
+      "expo-local-authentication",
+      [
+        "react-native-vision-camera",
+        {
+          "cameraPermissionText": "Prosperium precisa da câmera para ler comprovantes."
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true

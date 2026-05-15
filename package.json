@@ -33,8 +33,11 @@
     "react-native-safe-area-context": "~5.6.0",
     "react-native-screens": "~4.16.0",
     "react-native-svg": "^15.12.1",
+    "react-native-vision-camera": "^5.0.9",
+    "react-native-worklets-core": "^1.6.3",
     "tailwindcss": "^4.3.0",
-    "uuidv7": "^1.2.1"
+    "uuidv7": "^1.2.1",
+    "vision-camera-ocr": "^1.0.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.29.0",
