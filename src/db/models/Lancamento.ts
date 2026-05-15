@@ -1,7 +1,7 @@
 import { Model } from '@nozbe/watermelondb'
 import { field, readonly, date, text } from '@nozbe/watermelondb/decorators'
 
-export type SyncStatus = 'pending' | 'syncing' | 'synced' | 'error'
+export type SyncState = 'pending' | 'syncing' | 'synced' | 'error'
 
 export class Lancamento extends Model {
   static table = 'lancamentos'
@@ -21,7 +21,7 @@ export class Lancamento extends Model {
   @field('id_tp_lcto') idTpLcto!: number | null
   @text('status_pgto') statusPgto!: string
   @text('observacoes') observacoes!: string | null
-  @text('sync_status') syncStatus!: SyncStatus
+  @text('sync_status') syncState!: SyncState
   @text('sync_error') syncError!: string | null
   @readonly @date('created_at') createdAt!: Date
   @date('updated_at') updatedAt!: Date

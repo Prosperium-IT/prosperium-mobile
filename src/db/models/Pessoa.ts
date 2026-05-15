@@ -1,6 +1,6 @@
 import { Model } from '@nozbe/watermelondb'
 import { field, readonly, date, text } from '@nozbe/watermelondb/decorators'
-import type { SyncStatus } from './Lancamento'
+import type { SyncState } from './Lancamento'
 
 export class Pessoa extends Model {
   static table = 'pessoas'
@@ -12,7 +12,7 @@ export class Pessoa extends Model {
   @text('cpf_cnpj') cpfCnpj!: string | null
   @text('email') email!: string | null
   @text('telefone') telefone!: string | null
-  @text('sync_status') syncStatus!: SyncStatus
+  @text('sync_status') syncState!: SyncState
   @readonly @date('created_at') createdAt!: Date
   @date('updated_at') updatedAt!: Date
 }

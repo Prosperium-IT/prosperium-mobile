@@ -1,6 +1,6 @@
 import { Model } from '@nozbe/watermelondb'
 import { field, readonly, date, text } from '@nozbe/watermelondb/decorators'
-import type { SyncStatus } from './Lancamento'
+import type { SyncState } from './Lancamento'
 
 export class Navio extends Model {
   static table = 'navios'
@@ -11,7 +11,7 @@ export class Navio extends Model {
   @text('imo') imo!: string | null
   @text('bandeira') bandeira!: string | null
   @text('tipo') tipo!: string | null
-  @text('sync_status') syncStatus!: SyncStatus
+  @text('sync_status') syncState!: SyncState
   @readonly @date('created_at') createdAt!: Date
   @date('updated_at') updatedAt!: Date
 }

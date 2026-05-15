@@ -28,12 +28,12 @@ export default function TenantScreen() {
     setError(null)
 
     try {
-      const result = await authService.checkTenant(clean)
+      const result = await authService.tenantExists(clean)
       if (!result.exists) {
         setError('Empresa não encontrada. Verifique o identificador.')
         return
       }
-      setTenant(clean, result.display_name ?? clean)
+      setTenant(clean, result.label ?? clean)
       router.push('/(auth)/login')
     } catch {
       setError('Não foi possível verificar a empresa. Tente novamente.')

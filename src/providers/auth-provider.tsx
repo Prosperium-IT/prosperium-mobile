@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect, PropsWithChildren } from 'react'
 import { SecureStorageAdapter } from '@/adapters/secure-storage-adapter'
+import { configStorage } from '@/adapters/mmkv-storage'
 import { createAuthService } from '@prosperium-it/shared'
 import { http } from '@/lib/http'
 
@@ -43,23 +44,16 @@ export function AuthProvider({ children }: PropsWithChildren) {
   }, [])
 
   const login = async (email: string, password: string) => {
-    const response = await authService.login(email, password)
-    const token = (response as Record<string, unknown>).access_token as string ?? (response as Record<string, unknown>).token as string
-    const refreshToken = (response as Record<string, unknown>).refresh_token as string
-    await storage.set('auth_token', token)
-    if (refreshToken) await storage.set('refresh_token', refreshToken)
-    const userData = (response as Record<string, unknown>).user
-    if (userData) {
-      await storage.set('user_data', JSON.stringify(userData))
-      setUser(userData as AuthUser)
-    }
+    const tenant = configStorage.get('current_tenant') ?? ''
+    const response = await authService.login({ email, password, tenant })
+    await storage.set('auth_token', response.access_token)
+    await storage.set('refresh_token', response.refresh_token)
+    await storage.set('user_data', JSON.stringify(response.operador))
+    setUser(response.operador)
   }
 
   const logout = async () => {
-    const refreshToken = await storage.get('refresh_token')
-    if (refreshToken) {
-      await authService.logout(refreshToken).catch(() => {})
-    }
+    await authService.logout().catch(() => {})
     await storage.remove('auth_token')
     await storage.remove('refresh_token')
     await storage.remove('user_data')
