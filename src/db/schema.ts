@@ -39,6 +39,7 @@ export const schema = appSchema({
         { name: 'email', type: 'string', isOptional: true },
         { name: 'telefone', type: 'string', isOptional: true },
         { name: 'sync_status', type: 'string' },
+        { name: 'sync_error', type: 'string', isOptional: true },
         { name: 'created_at', type: 'number' },
         { name: 'updated_at', type: 'number' },
       ],

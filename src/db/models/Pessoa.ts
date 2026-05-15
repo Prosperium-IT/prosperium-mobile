@@ -13,6 +13,7 @@ export class Pessoa extends Model {
   @text('email') email!: string | null
   @text('telefone') telefone!: string | null
   @text('sync_status') syncState!: SyncState
+  @text('sync_error') syncError!: string | null
   @readonly @date('created_at') createdAt!: Date
   @date('updated_at') updatedAt!: Date
 }
