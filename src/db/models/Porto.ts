@@ -15,3 +15,5 @@ export class Porto extends Model {
   @readonly @date('created_at') createdAt!: Date
   @date('updated_at') updatedAt!: Date
 }
+
+export default Porto
