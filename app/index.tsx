@@ -11,11 +11,6 @@ export default function Index() {
 
   useEffect(() => {
     async function resolve() {
-      const tenant = configStorage.get('current_tenant')
-      if (!tenant) {
-        setDestination('/(auth)/tenant')
-        return
-      }
       const token = await storage.get('auth_token')
       setDestination(token ? '/(tabs)/dashboard' : '/(auth)/login')
     }

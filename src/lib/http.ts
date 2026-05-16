@@ -19,7 +19,7 @@ export const http = createHttpClient({
   onUnauthorized: () => {
     storageAdapter.remove('auth_token')
     storageAdapter.remove('refresh_token')
-    router.replace('/(auth)/tenant')
+    router.replace('/(auth)/login')
   },
   timeout: 30000,
 })

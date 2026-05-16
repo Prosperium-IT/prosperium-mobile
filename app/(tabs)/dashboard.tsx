@@ -10,7 +10,7 @@ export default function DashboardScreen() {
   const handleLogout = async () => {
     await logout()
     clearTenant()
-    router.replace('/(auth)/tenant')
+    router.replace('/(auth)/login')
   }
 
   return (
