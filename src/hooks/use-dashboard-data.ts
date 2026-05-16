@@ -27,13 +27,13 @@ export function useDashboardData(): UseDashboardDataResult {
   const loadCache = useCallback(async () => {
     try {
       const cacheCollection = database.get<DashboardCache>('dashboard_cache')
-      const cacheRecords = await cacheCollection.query().fetch()
+      const cacheRecords: DashboardCache[] = await cacheCollection.query().fetch()
 
       if (cacheRecords.length > 0) {
         const latest = cacheRecords[cacheRecords.length - 1]
         setData({
           timestamp: latest.timestamp,
-          items: JSON.parse(latest.items),
+          items: JSON.parse(latest.items ?? '{}'),
         })
       }
     } catch (err) {
@@ -91,11 +91,12 @@ export function useDashboardData(): UseDashboardDataResult {
     }
   }, [database])
 
-  // Auto-refresh interval
+  // Auto-refresh interval — reads config once at mount
   useEffect(() => {
+    const intervalMs = dashboardConfig.getRefreshIntervalSeconds() * 1000
     const interval = setInterval(() => {
       void refresh()
-    }, dashboardConfig.getRefreshIntervalSeconds() * 1000)
+    }, intervalMs)
 
     intervalRef.current = interval
 
