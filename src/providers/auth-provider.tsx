@@ -12,6 +12,7 @@ interface AuthUser {
   nome: string
   email: string
   roles: string[]
+  un_negocios_permitidas: number[]
 }
 
 interface AuthContextValue {
@@ -49,7 +50,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     await storage.set('auth_token', response.access_token)
     await storage.set('refresh_token', response.refresh_token)
     await storage.set('user_data', JSON.stringify(response.operador))
-    setUser(response.operador)
+    setUser(response.operador as AuthUser)
   }
 
   const logout = async () => {

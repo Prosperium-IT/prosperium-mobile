@@ -1,7 +1,7 @@
 import { appSchema, tableSchema } from '@nozbe/watermelondb'
 
 export const schema = appSchema({
-  version: 1,
+  version: 2,
   tables: [
     tableSchema({
       name: 'lancamentos',
@@ -24,6 +24,7 @@ export const schema = appSchema({
         // sync_status: 'pending' | 'syncing' | 'synced' | 'error'
         { name: 'sync_status', type: 'string' },
         { name: 'sync_error', type: 'string', isOptional: true },
+        { name: 'pendente_revisao', type: 'boolean' },
         { name: 'created_at', type: 'number' },
         { name: 'updated_at', type: 'number' },
       ],

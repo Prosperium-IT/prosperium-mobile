@@ -23,6 +23,7 @@ export class Lancamento extends Model {
   @text('observacoes') observacoes!: string | null
   @text('sync_status') syncState!: SyncState
   @text('sync_error') syncError!: string | null
+  @field('pendente_revisao') pendenteRevisao!: boolean
   @readonly @date('created_at') createdAt!: Date
   @date('updated_at') updatedAt!: Date
 }
