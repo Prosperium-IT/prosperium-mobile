@@ -1,7 +1,7 @@
 import { appSchema, tableSchema } from '@nozbe/watermelondb'
 
 export const schema = appSchema({
-  version: 2,
+  version: 3,
   tables: [
     tableSchema({
       name: 'lancamentos',
@@ -108,6 +108,14 @@ export const schema = appSchema({
         { name: 'descricao', type: 'string' },
         { name: 'natureza', type: 'number' },
         { name: 'codigo', type: 'string', isOptional: true },
+      ],
+    }),
+    // Dashboard cache — armazena última versão dos dados do dashboard
+    tableSchema({
+      name: 'dashboard_cache',
+      columns: [
+        { name: 'timestamp', type: 'number' },
+        { name: 'items', type: 'string' }, // JSON stringificado
       ],
     }),
   ],

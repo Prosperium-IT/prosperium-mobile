@@ -9,6 +9,7 @@ import { Navio } from './models/Navio'
 import { Porto } from './models/Porto'
 import { UnNegocio } from './models/UnNegocio'
 import { TpLcto } from './models/TpLcto'
+import { DashboardCache } from './models/DashboardCache'
 
 function createDatabase(tenant: string): Database {
   const adapter = new SQLiteAdapter({
@@ -23,7 +24,7 @@ function createDatabase(tenant: string): Database {
 
   return new Database({
     adapter,
-    modelClasses: [Lancamento, Pessoa, Operacao, Navio, Porto, UnNegocio, TpLcto],
+    modelClasses: [Lancamento, Pessoa, Operacao, Navio, Porto, UnNegocio, TpLcto, DashboardCache],
   })
 }
 
