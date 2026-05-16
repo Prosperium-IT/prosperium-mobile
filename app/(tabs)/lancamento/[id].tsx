@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, Alert, Pressable } from 'react-native'
 import { useLocalSearchParams, useRouter } from 'expo-router'
 import { useLancamento, updateLancamento, deleteLancamento } from '@/db/hooks/use-lancamentos'
-import { LancamentoForm, FormValues } from './_components/LancamentoForm'
+import { LancamentoForm, FormValues } from '@/components/lancamento/LancamentoForm'
 import { useSync } from '@/providers/sync-provider'
 
 export default function LancamentoDetalhe() {

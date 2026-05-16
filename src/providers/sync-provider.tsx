@@ -25,6 +25,7 @@ const SyncContext = createContext<SyncContextValue | null>(null)
 
 const BACKGROUND_THRESHOLD_MS = 30_000
 const DEBOUNCE_MS = 2_000
+const AUTO_SYNC_INTERVAL_MS = 5 * 60_000
 
 export function SyncProvider({ children }: { children: React.ReactNode }) {
   const database = useDatabase()
@@ -39,11 +40,16 @@ export function SyncProvider({ children }: { children: React.ReactNode }) {
   const backgroundedAt = useRef<number | null>(null)
   const debounceTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
+  const isSyncingRef = useRef(false)
+
   const triggerSyncImmediate = useCallback(async () => {
     if (!tenant || !isAuthenticated || !database) return
+    if (isSyncingRef.current) return
+    isSyncingRef.current = true
     setIsSyncing(true)
     setSyncError(null)
     const result = await runSync(database, tenant)
+    isSyncingRef.current = false
     setIsSyncing(false)
     if (result.success) {
       setLastSyncedAt(result.timestamp)
@@ -93,6 +99,17 @@ export function SyncProvider({ children }: { children: React.ReactNode }) {
     if (isAuthenticated && tenant) {
       void triggerSyncImmediate()
     }
+  }, [isAuthenticated, tenant, triggerSyncImmediate])
+
+  // Polling automático a cada AUTO_SYNC_INTERVAL_MS — só em foreground + autenticado
+  useEffect(() => {
+    if (!isAuthenticated || !tenant) return
+    const interval = setInterval(() => {
+      if (AppState.currentState === 'active') {
+        void triggerSyncImmediate()
+      }
+    }, AUTO_SYNC_INTERVAL_MS)
+    return () => clearInterval(interval)
   }, [isAuthenticated, tenant, triggerSyncImmediate])
 
   return (

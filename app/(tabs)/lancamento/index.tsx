@@ -5,7 +5,7 @@ import { useLancamentos } from '@/db/hooks/use-lancamentos'
 import { useSync } from '@/providers/sync-provider'
 import { SearchInput } from '@/components/ds/SearchInput'
 import { FAB } from '@/components/ds/FAB'
-import { LancamentoCard } from './_components/LancamentoCard'
+import { LancamentoCard } from '@/components/lancamento/LancamentoCard'
 
 export default function LancamentosTab() {
   const router = useRouter()
