@@ -33,6 +33,7 @@
       ]
     },
     "plugins": [
+      "@morrowdigital/watermelondb-expo-plugin",
       "expo-router",
       "expo-dev-client",
       "expo-secure-store",
