@@ -1,20 +1,49 @@
 {
   "cli": {
-    "version": ">= 10.0.0"
+    "version": ">= 10.0.0",
+    "appVersionSource": "remote"
   },
   "build": {
     "development": {
       "developmentClient": true,
-      "distribution": "internal"
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_CORE_API_URL": "http://192.168.1.100:8000/api",
+        "EXPO_PUBLIC_PORTS_API_URL": "http://192.168.1.100:8200/api"
+      }
     },
     "preview": {
-      "distribution": "internal"
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_CORE_API_URL": "https://mobile.prosperium.net.br/api",
+        "EXPO_PUBLIC_PORTS_API_URL": "https://mobile.prosperium.net.br/ports-api"
+      }
     },
     "production": {
-      "distribution": "store"
+      "distribution": "store",
+      "autoIncrement": true,
+      "android": {
+        "buildType": "app-bundle"
+      },
+      "env": {
+        "EXPO_PUBLIC_CORE_API_URL": "https://mobile.prosperium.net.br/api",
+        "EXPO_PUBLIC_PORTS_API_URL": "https://mobile.prosperium.net.br/ports-api"
+      }
     }
   },
   "submit": {
-    "production": {}
+    "production": {
+      "android": {
+        "track": "internal",
+        "releaseStatus": "draft",
+        "serviceAccountKeyPath": "./play-service-account.json"
+      }
+    }
   }
 }

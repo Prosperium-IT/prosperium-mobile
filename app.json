@@ -15,17 +15,26 @@
     "scheme": "prosperium",
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "br.com.prosperium.mobile"
+      "bundleIdentifier": "br.com.prosperium.mobile",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Prosperium precisa da câmera para ler comprovantes."
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#1e40af"
       },
-      "package": "br.com.prosperium.mobile"
+      "package": "br.com.prosperium.mobile",
+      "permissions": [
+        "android.permission.USE_BIOMETRIC",
+        "android.permission.USE_FINGERPRINT",
+        "android.permission.CAMERA"
+      ]
     },
     "plugins": [
       "expo-router",
+      "expo-dev-client",
       "expo-secure-store",
       "expo-local-authentication",
       [
@@ -37,6 +46,13 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "b4f3a69f-b4f9-42aa-9ef4-3dbb488a6cbe"
+      }
+    },
+    "owner": "jlazzarotto"
   }
 }
