@@ -35,6 +35,7 @@ yarn-error.*
 
 # EAS / Google Play submit credentials
 play-service-account.json
+credentials.json
 
 # typescript
 *.tsbuildinfo
